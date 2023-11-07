@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Chau+Philomene+One&family=Inter:wght@300&display=swap');
+body{
+    background-color: #EFF1E6;
+}
+
+form{
+    font-family: 'Inter', sans-serif;
+}
+
+form legend{
+    font-family: 'Chau Philomene One', sans-serif;
+    font-size: 20px;
+}
+
+
+
+h1{
+    font-family: 'Chau Philomene One', sans-serif;
+    font-size: 30px;
+    color: #9B705B;
+    text-align: center;
+}
+
+.top{
+    margin-left: 37%;
+    height: fit-content;
+    width: fit-content;
+}
+
+.imagen{
+    height: 350px;
+    width: 350px;
+}
+
+.seccion{
+    margin: 3%;
+}
+
+.boton{
+    background-color: #9B705B;
+    color: black; 
+    border-color:black;
+    padding: 10px 20px; 
+    cursor: pointer; 
+    margin-left: 3%;
+    margin-bottom: 3%;
+    font-family: 'Chau Philomene One', sans-serif;
+    
+}
