@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Bosque Guard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'general.css' %}">
+</head>
+<body>
+    <div class="top"><img src="{% static 'bosque.png' %}" class="imagen"></div>
+    <h1>Resultado de Evaluación Ambiental</h1>
+    {% for resultado in resultados %}
+    <div class="resultados">
+        <fieldset class="seccion">
+            <legend>Sección 1: Generación de Desechos (Puntuación: {{ resultado.PuntajeSeccion1 }} puntos)</legend>
+            {% if resultado.PuntajeSeccion1 == 0 %}
+            <p>El proyecto no generará desechos que puedan afectar negativamente el bosque. Las medidas de gestión de residuos y la eliminación de materiales no biodegradables están bien planificadas y mitigarán cualquier impacto potencial.</p>
+            {% elif resultado.PuntajeSeccion1 == 2 %}
+            <p>El proyecto generará algunos desechos, pero se han establecido medidas de gestión para evitar acumulaciones y posibles riesgos ambientales. Además, se considera la recolección y eliminación adecuada de materiales no biodegradables después del proyecto.</p>
+            {% elif resultado.PuntajeSeccion1 == 4 %}
+            <p>El proyecto generará una cantidad significativa de desechos de construcción y demolición, pero se han implementado estrategias de reciclaje y reutilización de estos desechos. Además, se han previsto medidas de almacenamiento y manejo seguro de productos químicos peligrosos.</p>
+            {% elif resultado.PuntajeSeccion1 == 6 %}
+            <p> El proyecto generará una cantidad considerable de desechos que podrían alterar el entorno forestal. Se han tomado medidas para gestionarlos, pero existe un riesgo de contaminación o acumulación si no se siguen estrictamente las medidas de gestión.</p>
+            {% elif resultado.PuntajeSeccion1 == 8 %}
+            <p> El proyecto generará una gran cantidad de desechos, incluyendo materiales no biodegradables y productos químicos peligrosos. Aunque se han implementado medidas de manejo, existe un riesgo ambiental considerable si no se aplican de manera efectiva.</p>
+            {% else %}
+            <p>El proyecto generará una cantidad masiva de desechos de construcción y demolición, con un alto potencial de contaminación y daño ambiental. Las medidas de manejo y mitigación son inadecuadas para evitar impactos significativos en el bosque.</p>
+            {% endif %}
+        </fieldset>
+        <fieldset class="seccion">
+            <legend>Sección 2:  Estancamiento de las Fuentes de Agua (Puntuación: {{ resultado.PuntajeSeccion2 }} puntos)</legend>
+            {% if resultado.PuntajeSeccion2 == 0 %}
+            <p>El proyecto no implicará la construcción de represas, embalses ni cambios en el flujo natural de las aguas superficiales del bosque.</p>
+            {% elif resultado.PuntajeSeccion2 == 2.5 %}
+            <p>El proyecto conllevará la construcción de represas, embalses o cambios significativos en el flujo de las aguas superficiales, lo que podría tener un impacto medio en el entorno acuático del bosque.</p>
+            {% else %}
+            <p>El proyecto conllevará la construcción de represas, embalses y cambios significativos en el flujo de las aguas superficiales, lo que podría tener un impacto grave en el entorno acuático del bosque.</p>
+            {% endif %}
+        </fieldset>
+        <fieldset class="seccion">
+            <legend>Sección 3: Contaminación de las Fuentes de Agua por Erosión del Suelo (Puntuación: {{ resultado.PuntajeSeccion3}} puntos)</legend>
+            {% if resultado.PuntajeSeccion3 == 0 %}
+            <p>El proyecto no utilizará materiales que aumenten la erosión del suelo y se implementarán prácticas efectivas de manejo de suelo para prevenir la erosión.</p>
+            {% else %}
+            <p>El proyecto utilizará materiales que aumentarán significativamente la erosión del suelo y no se implementarán prácticas de manejo efectivas, lo que podría causar una grave contaminación del agua circundante.</p>
+            {% endif %}
+        </fieldset>
+        <fieldset class="seccion">
+            <legend>Sección 4: Contaminación de las Fuentes de Agua por Erosión del Suelo (Puntuación: {{ resultado.PuntajeSeccion4}} puntos)</legend>
+            {% if resultado.PuntajeSeccion4 == 0 %}
+            <p>El proyecto no emitirá gases ni partículas que afecten negativamente la calidad del aire en el bosque, o se han implementado medidas de control de emisiones efectivas.</p>
+            {% else %}
+            <p>El proyecto emitirá gases y partículas que podrían deteriorar significativamente la calidad del aire en el bosque sin medidas de control adecuadas.</p>
+            {% endif %}
+        </fieldset>
+        <fieldset class="seccion">
+            <legend>Sección 5: Generación de Desechos (Puntuación: {{ resultado.PuntajeSeccion5 }} puntos)</legend>
+            {% if resultado.PuntajeSeccion5 == 0 %}
+            <p>Si la diferencia en decibeles es 0, esto significa que no habrá un aumento en el nivel de ruido en el bosque. El impacto en la tranquilidad del bosque será mínimo, y la vida silvestre no se verá afectada significativamente.</p>
+            {% elif resultado.PuntajeSeccion5 == 2 %}
+            <p>Una diferencia de 1 a 5 dB implica un aumento mínimo en el nivel de ruido. Este aumento probablemente pasará desapercibido para la mayoría de la vida silvestre y tendrá un impacto mínimo en la calidad del hábitat.</p>
+            {% elif resultado.PuntajeSeccion5 == 4 %}
+            <p>Una diferencia de 6 a 10 dB representa un aumento bajo en el nivel de ruido, similar al tráfico ligero en una carretera cercana. Este nivel de ruido puede ser percibido por la vida silvestre y podría causar cierta incomodidad, pero no tendría un impacto devastador.</p>
+            {% elif resultado.PuntajeSeccion5 == 6 %}
+            <p>Una diferencia de 11 a 15 dB indica un aumento moderado en el nivel de ruido, comparable al ruido de una conversación en grupo. Este nivel de ruido podría causar estrés en algunas especies de vida silvestre y afectar su comportamiento, pero no necesariamente causaría daño permanente..</p>
+            {% elif resultado.PuntajeSeccion5 == 8 %}
+            <p>Una diferencia de 16 a 20 dB representa un aumento significativo en el nivel de ruido, similar al sonido de una sierra eléctrica. Este nivel de ruido tendría un impacto significativo en la vida silvestre, perturbando su comportamiento, causando estrés y afectando negativamente la calidad del hábitat.</p>
+            {% else %}
+            <p>Una diferencia de más de 20 dB o más indica un impacto máximo con niveles de ruido extremadamente altos, como una explosión. Este nivel de ruido sería altamente perjudicial para la vida silvestre, causando estrés extremo, cambios en el comportamiento, e incluso daño físico. Podría resultar en la expulsión de especies del área y una disminución significativa de la biodiversidad.</p>
+            {% endif %}
+        </fieldset>
+        <fieldset class="seccion">
+            <legend>Sección 6: Remoción y Pérdida del Suelo (Puntuación: {{ resultado.PuntajeSeccion6 }} puntos)</legend>
+        </fieldset>
+        <fieldset class="seccion">
+            <legend>Sección 7: Contaminación del Suelo (Puntuación: {{ resultado.PuntajeSeccion7 }} puntos)</legend>
+            {% if resultado.PuntajeSeccion7 == 0 %}
+            <p>Indica que se ha desarrollado un plan de manejo de residuos integral, se han implementado medidas de prevención efectivas y se han establecido sistemas de contención de derrames y protocolos de respuesta para emergencias. En este escenario, se ha maximizado la prevención y la capacidad de respuesta, lo que reduce significativamente el riesgo de contaminación del suelo y sus impactos. Esto asegura la protección del entorno natural y minimiza las consecuencias negativas para la vida silvestre y la calidad del suelo en el bosque.</p>
+            {% elif resultado.PuntajeSeccion7 == 2 %}
+            <p>Un impacto mínimo se produce cuando se ha desarrollado un plan de manejo de residuos, pero no se han implementado medidas efectivas para prevenir la contaminación del suelo. Esto podría resultar en una exposición limitada a residuos, lo que podría afectar negativamente a la vida silvestre y la calidad del suelo en ciertas áreas cercanas a la fuente de los residuos.</p>
+            {% elif resultado.PuntajeSeccion7 == 4 %}
+            <p>Un impacto bajo se produce cuando existe un plan de manejo de residuos y se han implementado medidas de prevención, pero no se han instalado sistemas de contención. Aunque se ha minimizado el riesgo de contaminación del suelo, todavía existe la posibilidad de derrames de sustancias peligrosas que podrían afectar zonas específicas y requerir una limpieza adicional.</p>
+            {% elif resultado.PuntajeSeccion7 == 6 %}
+            <p>Un impacto moderado se refiere a la presencia de un plan de manejo de residuos, medidas de prevención y sistemas de contención. Sin embargo, no se han establecido protocolos de respuesta. En este caso, se ha mitigado gran parte del riesgo, pero la falta de protocolos de respuesta podría retrasar la acción necesaria en caso de un derrame o incidente, lo que podría resultar en un impacto ambiental significativo a corto plazo.</p>
+            {% else %}
+            <p>Un impacto significativo implica que se ha desarrollado un plan de manejo de residuos completo, se han implementado medidas de prevención y sistemas de contención, y se han establecido protocolos de respuesta para emergencias. Esto minimiza en gran medida el riesgo de contaminación del suelo y permite una respuesta rápida en caso de derrames o incidentes. El impacto es bajo, y el entorno del bosque se mantiene protegido.</p>
+            {% endif %}
+        </fieldset>
+        <fieldset class="seccion">
+            <legend>Sección 8: Extracción de Flora y Fauna (Puntuación: {{ resultado.PuntajeSeccion8 }} puntos)</legend>
+            {% if resultado.PuntajeSeccion8 == 0 %}
+            <p>Una puntuación de 0 puntos indica que no se planea extraer flora ni fauna del área para fines comerciales sin regulación. En este escenario, el proyecto no plantea amenazas significativas para la biodiversidad local y la vida silvestre, ya que se evita la extracción no controlada de recursos naturales. Esto es altamente beneficioso para la conservación de la flora y fauna del bosque, contribuyendo a la preservación de las especies y sus hábitats.</p>
+            {% elif resultado.PuntajeSeccion8 == 2.5 %}
+            <p>Una puntuación de 2.5 puntos implica que se planea extraer flora y fauna del área para fines comerciales, pero se han implementado regulaciones para supervisar y limitar estas actividades. Esto reduce el impacto en comparación con la extracción no regulada, pero todavía puede tener efectos negativos en la biodiversidad local.</p>
+            {% else %}
+            <p>Una puntuación de 5 puntos indica que se planea extraer flora y fauna del área para fines comerciales sin regulación. Esto representa un impacto máximo en la biodiversidad, ya que la extracción no regulada puede llevar a la disminución de las poblaciones de especies silvestres, la destrucción de hábitats y la interrupción de los ciclos ecológicos.</p>
+            {% endif %}
+        </fieldset>
+        <fieldset class="seccion">
+            <legend>Sección 9: Alteración de Cuencas y Cursos de Agua (Puntuación: {{ resultado.PuntajeSeccion9 }} puntos)</legend>
+            {% if resultado.PuntajeSeccion9 == 0 %}
+            <p>Una puntuación de 0 puntos indica que el proyecto no afectará las cuencas hidrográficas y cursos de agua en el bosque. Esto es beneficioso para la conservación de estos sistemas acuáticos y la biodiversidad asociada.</p>
+            {% else %}
+            <p>Una puntuación de 5 puntos indica que el proyecto afectará las cuencas hidrográficas y cursos de agua en el bosque, lo que representa un impacto máximo en los sistemas acuáticos y la biodiversidad relacionada.</p>
+            {% endif %}
+        </fieldset>
+        <fieldset class="seccion">
+            <legend>Sección 10: Impacto en la Biodiversidad (Puntuación: {{ resultado.PuntajeSeccion10 }} puntos)</legend>
+            {% if resultado.PuntajeSeccion10 == 0 %}
+            <p>Se han identificado especies en peligro de extinción y se están tomando medidas efectivas para proteger la biodiversidad local, si el proyecto afectará la migración de la fauna, pero se han considerado soluciones adecuadas o si se están implementando medidas para proteger la biodiversidad local, como pasos de fauna o soluciones similares. Esto refleja un impacto significativo en la biodiversidad.</p>
+            {% elif resultado.PuntajeSeccion10 == 5 %}
+            <p>Si se han identificado especies en peligro de extinción, pero no se han establecido medidas de protección, o si el proyecto afectará la migración de la fauna sin soluciones específicas, obtendrás 2.5 puntos. Esto representa un impacto mínimo en la biodiversidad.</p>
+            {% else %}
+            <p>Se han identificado especies en peligro de extinción en el área del proyecto, pero no se han tomado medidas para proteger la biodiversidad local, si el proyecto afectará la migración de la fauna sin implementar soluciones o si no se consideran medidas como pasos de fauna o soluciones similares. Esto indica un alto riesgo para la biodiversidad en el área.</p>
+            {% endif %}
+        </fieldset>
+        <fieldset class="seccion">
+            <legend>Sección 11: Impacto en la Calidad del Agua (Puntuación: {{ resultado.PuntajeSeccion11 }} puntos)</legend>
+            {% if resultado.PuntajeSeccion11 == 0 %}
+            <p>Obtendrás 0 puntos si se están implementando medidas efectivas para proteger la calidad del agua en ríos o arroyos cercanos, lo que es altamente beneficioso para prevenir la contaminación del agua y mantener la salud de los ecosistemas acuáticos. </p>
+            {% else %}
+            <p>Obtendrás la puntuación completa de 5 puntos si el proyecto afectará la calidad físicoquímica del agua externa y subterránea sin implementar medidas para protegerla. Esto indica un alto riesgo de contaminación del agua.</p>
+            {% endif %}
+        </fieldset>
+        <fieldset class="seccion">
+            <legend>Sección 12: Impacto en la Vegetación y Suelo (Puntuación: {{ resultado.PuntajeSeccion12 }} puntos)</legend>
+            {% if resultado.PuntajeSeccion12 == 0 %}
+            <p>Obtendrás 0 puntos si se están tomando medidas efectivas para proteger las especies vegetales únicas y se planifica una sólida conservación de la cobertura forestal. Esto refleja un impacto significativo en la protección de la vegetación y el suelo.</p>
+            {% else %}
+            <p>Obtendrás la puntuación completa de 10 puntos si se prevé la pérdida de especies vegetales únicas en el bosque sin planes de conservación o si no se planifica la conservación de la cobertura forestal. Esto indica un alto riesgo de pérdida de vegetación y degradación del suelo.</p>
+            {% endif %}
+        </fieldset>
+        <fieldset class="seccion">
+            <legend>Sección 13: Impacto en la Fauna (Puntuación: {{ resultado.PuntajeSeccion13 }} puntos)</legend>
+            {% if resultado.PuntajeSeccion13 == 0 %}
+            <p>Obtendrás la puntuación 0 puntos si se han implementado medidas efectivas para proteger la fauna local y se han evitado reducciones significativas en las poblaciones de animales y la destrucción de albergues de fauna. Esto indica un impacto significativo en la conservación de la fauna local.</p>
+            {% elif resultado.PuntajeSeccion13 == 5 %}
+            <p>Si se han considerado algunas medidas para mitigar el impacto en la fauna, pero el proyecto aún causará la reducción de poblaciones o la destrucción de albergues de fauna, obtendrás 5 puntos. Esto refleja un impacto mínimo en la fauna.</p>
+            {% else %}
+            <p>Obtendrás 10 puntos si el proyecto causará la reducción de las poblaciones de animales silvestres en la zona y si se producirá la destrucción de nidos, cuevas y otros albergues de la fauna. Esto indica un alto riesgo de impacto negativo en la fauna local.</p>
+            {% endif %}
+        </fieldset>
+        <fieldset class="seccion">
+            <legend>Sección 14: Extracción de Flora y Fauna (Puntuación: {{ resultado.PuntajeSeccion14 }} puntos)</legend>
+            {% if resultado.PuntajeSeccion14 == 0 %}
+            <p>Obtendrás 0 puntos si no se han identificado problemas específicos de invasiones de especies no nativas en el área del bosque afectado por el proyecto y si no se han observado actividades de extracción ilegal de recursos naturales en el área del proyecto.</p>
+            {% elif resultado.PuntajeSeccion14 == 2.5 %}
+            <p>Si se han identificado algunos problemas de invasiones de especies no nativas o actividades de extracción ilegal, pero no se han planificado medidas específicas para controlarlos, obtendrás 2.5 puntos. Esto refleja un impacto mínimo en el control de invasores y la extracción ilegal.</p>
+            {% else %}
+            <p>Obtendrás la puntuación completa de 5 puntos si a lo mejor se han planificado medidas efectivas para controlar y prevenir la invasión de especies no nativas en el área del proyecto pero no se han  han implementado estrategias para prevenir y controlar la extracción ilegal de recursos naturales en el bosque. Esto indica un impacto negativo significativo en la conservación y el manejo del bosque.</p>
+            {% endif %}
+        </fieldset>
+        <fieldset class="seccion">
+            <legend>Puntuación Total: {{ resultado.PuntajeTotal }}</legend>
+            {% if 0 <= resultado.PuntajeTotal and resultado.PuntajeTotal <= 10 %}
+            <p>0-10: Conservación completa (todos los servicios se conservan):** La puntuación máxima indica una conservación completa de los servicios del bosque. Todos los servicios ambientales se mantienen, lo que significa que el bosque sigue funcionando en su máxima capacidad, proporcionando todos los beneficios ecológicos y de biodiversidad que se esperan.</p>
+            {% elif 10 < resultado.PuntajeTotal and resultado.PuntajeTotal <= 30 %}
+            <p>11-30: Conservación muy alta (casi todos los servicios se conservan): Si tu puntuación cae en este rango, la conservación de los servicios del bosque es muy alta. Casi todos los servicios ambientales se conservan, lo que refleja una mínima pérdida de biodiversidad y una capacidad continua del bosque para ofrecer una amplia gama de servicios ecológicos.</p>
+            {% elif 30 < resultado.PuntajeTotal and resultado.PuntajeTotal <= 50 %}
+            <p>31-50: Conservación alta (la mayoría de los servicios se conserva): Obtener una puntuación en este rango implica una conservación sustancial de los servicios del bosque. La mayoría de los servicios ambientales se mantienen, lo que significa que el bosque sigue siendo capaz de proporcionar una amplia gama de beneficios ecológicos.</p>
+            {% elif 50 < resultado.PuntajeTotal and resultado.PuntajeTotal <= 70 %}
+            <p>51-70: Conservación moderada (alrededor del 50% de los servicios se conserva): En este punto, se logra una conservación moderada de los servicios del bosque. Alrededor del 50% de los servicios ambientales se conservan, lo que indica que, aunque hay pérdidas, aún se mantienen algunas funciones importantes del bosque.</p>
+            {% elif 70 < resultado.PuntajeTotal and resultado.PuntajeTotal <= 90 %}
+            <p>71-90: Conservación baja (una pequeña parte de los servicios se conserva): Una puntuación en este rango refleja una conservación relativamente baja de los servicios del bosque. Solo una pequeña parte de los servicios ambientales se mantiene, lo que sugiere una pérdida significativa de la biodiversidad y una disminución en la capacidad del bosque para proporcionar servicios ecológicos.</p>
+            {% else %}
+            <p>90-100: Conservación muy baja (casi ningún servicio se conserva): Si obtienes una puntuación en este rango, significa que el proyecto tiene un impacto extremadamente negativo en la conservación de los servicios del bosque. Casi ningún servicio ambiental se conserva, lo que indica una pérdida sustancial de la biodiversidad y la capacidad del bosque para proporcionar servicios ecológicos. </p>
+            {% endif %}
+        </fieldset>
+    </div>
+    {% endfor %}
+</body>
+</html>
